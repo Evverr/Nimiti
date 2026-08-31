@@ -34,9 +34,12 @@ img { display: block; }
 .header-left { gap: var(--minti-spacing-16); }
 .logo-link { width: 146px; height: 36px; display: flex; align-items: center; }
 .logo-link img { width: 146px; height: 36px; object-fit: contain; }
-.desktop-nav { gap: 40px; color: var(--minti-color-text-secondary); font-size: 16px; }
+.desktop-nav { gap: 32px; color: var(--minti-color-text-secondary); font-size: 16px; }
 .desktop-nav a, .icon-button { transition: opacity .2s ease, transform .2s ease; }
 .desktop-nav a:hover, .icon-button:hover { opacity: .55; }
+.desktop-nav a { position: relative; padding: 10px 0; white-space: nowrap; }
+.desktop-nav a.active { color: var(--minti-color-text-primary); }
+.desktop-nav a.active::after { content: ''; position: absolute; right: 0; bottom: 2px; left: 0; height: 2px; border-radius: 2px; background: var(--minti-color-bg-accent); }
 .header-actions { gap: var(--minti-spacing-6); }
 .icon-button { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; }
 .icon-button:active { transform: scale(.94); }
@@ -132,8 +135,8 @@ img { display: block; }
   .two-column { grid-template-columns: minmax(0,1fr) 380px; gap: 36px; }
 }
 @media (max-width: 760px) {
-  .site-header { height: 76px; padding: 0 18px; } .logo-link, .logo-link img { width: 112px; height: auto; } .desktop-nav { display: none; } .header-actions { gap: 4px; }
-  .hero { min-height: calc(100svh - 76px); height: calc(100svh - 76px); } .hero-image { object-position: 62% center; } .hero-shade { width: 100%; background: linear-gradient(90deg,rgba(6,19,37,.92),rgba(6,19,37,.15)); }
+  .site-header { height: 124px; padding: 0 18px; display: grid; grid-template-columns: 1fr auto; grid-template-rows: 76px 48px; } .header-left { display: contents; } .logo-link, .logo-link img { width: 112px; height: auto; } .desktop-nav { grid-column: 1/-1; align-self: stretch; gap: 24px; overflow-x: auto; scrollbar-width: none; } .desktop-nav::-webkit-scrollbar { display: none; } .desktop-nav a { flex: 0 0 auto; } .header-actions { gap: 4px; }
+  .hero { min-height: calc(100svh - 124px); height: calc(100svh - 124px); } .hero-image { object-position: 62% center; } .hero-shade { width: 100%; background: linear-gradient(90deg,rgba(6,19,37,.92),rgba(6,19,37,.15)); }
   .hero-content { top: auto; bottom: 12%; left: 24px; right: 24px; gap: 20px; } .hero h1 { font-size: 44px; line-height: 48px; } .hero p { font-size: 17px; line-height: 26px; }
   .catalog-page, .product-page, .cart-page, .checkout-page { padding: 40px 20px 72px; }
   .page-heading h1, .cart-list > h1, .checkout-form > h1 { font-size: 38px; line-height: 44px; }

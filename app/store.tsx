@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useMemo, useState } from 'react';
 
 const ASSET = '/minti';
@@ -23,6 +24,15 @@ function Icon({ name, size = 24, alt = '' }: { name: IconName; size?: number; al
 }
 
 export function Header() {
+  const pathname = usePathname();
+  const pages = [
+    { href: '/', label: 'Главная' },
+    { href: '/catalog', label: 'Каталог' },
+    { href: '/product', label: 'Товар' },
+    { href: '/cart', label: 'Корзина' },
+    { href: '/checkout', label: 'Заказ' },
+  ];
+
   return (
     <header className="site-header" data-figma-node="41:38">
       <div className="header-left">
@@ -30,7 +40,16 @@ export function Header() {
           <img src={`${ASSET}/logo.svg`} width="146" height="36" alt="Minti" />
         </Link>
         <nav className="desktop-nav" aria-label="Основная навигация">
-          <Link href="/catalog">Женщинам</Link><Link href="/catalog">Мужчинам</Link><Link href="/catalog">Коллекции</Link>
+          {pages.map((page) => (
+            <Link
+              key={page.href}
+              href={page.href}
+              className={pathname === page.href ? 'active' : undefined}
+              aria-current={pathname === page.href ? 'page' : undefined}
+            >
+              {page.label}
+            </Link>
+          ))}
         </nav>
       </div>
       <nav className="header-actions" aria-label="Действия">
