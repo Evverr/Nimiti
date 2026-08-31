@@ -1,8 +1,6 @@
 'use client';
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 const ASSET = '/minti';
 
@@ -24,7 +22,8 @@ function Icon({ name, size = 24, alt = '' }: { name: IconName; size?: number; al
 }
 
 export function Header() {
-  const pathname = usePathname();
+  const [pathname, setPathname] = useState('');
+  useEffect(() => setPathname(window.location.pathname), []);
   const pages = [
     { href: '/', label: 'Главная' },
     { href: '/catalog', label: 'Каталог' },
@@ -36,26 +35,26 @@ export function Header() {
   return (
     <header className="site-header" data-figma-node="41:38">
       <div className="header-left">
-        <Link href="/" className="logo-link" aria-label="Minti — на главную" data-figma-node="34:553">
+        <a href="/" className="logo-link" aria-label="Minti — на главную" data-figma-node="34:553">
           <img src={`${ASSET}/logo.svg`} width="146" height="36" alt="Minti" />
-        </Link>
+        </a>
         <nav className="desktop-nav" aria-label="Основная навигация">
           {pages.map((page) => (
-            <Link
+            <a
               key={page.href}
               href={page.href}
               className={pathname === page.href ? 'active' : undefined}
               aria-current={pathname === page.href ? 'page' : undefined}
             >
               {page.label}
-            </Link>
+            </a>
           ))}
         </nav>
       </div>
       <nav className="header-actions" aria-label="Действия">
-        <Link href="/catalog" className="icon-button" aria-label="Поиск"><Icon name="search" /></Link>
-        <Link href="/checkout" className="icon-button" aria-label="Профиль"><Icon name="user" /></Link>
-        <Link href="/cart" className="icon-button" aria-label="Корзина"><Icon name="bag" /></Link>
+        <a href="/catalog" className="icon-button" aria-label="Поиск"><Icon name="search" /></a>
+        <a href="/checkout" className="icon-button" aria-label="Профиль"><Icon name="user" /></a>
+        <a href="/cart" className="icon-button" aria-label="Корзина"><Icon name="bag" /></a>
       </nav>
     </header>
   );
@@ -71,7 +70,7 @@ export function HomeScreen() {
       <section className="hero" data-figma-node="43:92">
         <img className="hero-image" src={`${ASSET}/hero.png`} alt="Медицинские специалисты в форме Minti" />
         <div className="hero-shade" />
-        <div className="hero-content"><span className="hero-accent" /><h1>Создано для тех,<br />кто заботится</h1><p>Профессиональная форма. Честный комфорт. Каждый день.</p><Link href="/catalog" className="button button-primary">Смотреть каталог</Link></div>
+        <div className="hero-content"><span className="hero-accent" /><h1>Создано для тех,<br />кто заботится</h1><p>Профессиональная форма. Честный комфорт. Каждый день.</p><a href="/catalog" className="button button-primary">Смотреть каталог</a></div>
       </section>
     </Shell>
   );
@@ -79,10 +78,10 @@ export function HomeScreen() {
 
 function ProductCard({ product }: { product: (typeof products)[number] }) {
   return (
-    <Link className="product-card" href="/product" aria-label={`${product.name}, ${product.price}`}>
+    <a className="product-card" href="/product" aria-label={`${product.name}, ${product.price}`}>
       <div className="product-media"><img src={`${ASSET}/${product.image}`} alt={product.name} /><span className="badge">{product.badge}</span><span className="heart"><Icon name="heart" /></span></div>
       <h2>{product.name}</h2><p><strong>{product.price}</strong><span>· 4 цвета</span></p>
-    </Link>
+    </a>
   );
 }
 
@@ -117,7 +116,7 @@ export function ProductScreen() {
           <div className="swatches">{colors.map(([name, hex]) => <button key={name} aria-label={name} className={color === name ? 'active' : ''} style={{ background: hex }} onClick={() => setColor(name)} />)}</div>
           <p className="muted">Параметры модели: Рост 172, 86/61/87<br />Размер на модели: S</p><button className="text-link">Гид по размерам&nbsp; ›</button>
           <div className="product-controls"><button className="chip">S 40/42&nbsp; ⌄</button><Quantity value={quantity} onChange={setQuantity} /></div>
-          <Link className="button button-primary" href="/cart">Добавить в корзину · {quantity * 4600} ₽</Link><button className="info-link">Намекнуть о подарке&nbsp; ›</button><button className="info-link">Узнать наличие в магазине&nbsp; ›</button><p className="muted about">О товаре<br />Мягкая дышащая ткань, свободная посадка и функциональные карманы для долгой смены.</p>
+          <a className="button button-primary" href="/cart">Добавить в корзину · {quantity * 4600} ₽</a><button className="info-link">Намекнуть о подарке&nbsp; ›</button><button className="info-link">Узнать наличие в магазине&nbsp; ›</button><p className="muted about">О товаре<br />Мягкая дышащая ткань, свободная посадка и функциональные карманы для долгой смены.</p>
         </div>
       </section>
     </Shell>
@@ -130,7 +129,7 @@ function CartItem({ name, meta, price, image }: { name: string; meta: string; pr
 }
 
 export function CartScreen() {
-  return <Shell node="43:55"><section className="two-column cart-page"><div className="cart-list"><h1>Корзина</h1><p className="muted">2 товара</p><CartItem name="Топ Kimono Graphite" meta="Графит · S 40/42" price="4 600 ₽" image="cart-1.png" /><CartItem name="Брюки Flow Navy" meta="Тёмно-синий · M 44/46" price="4 300 ₽" image="cart-2.png" /></div><aside className="summary-card"><h2>Ваш заказ</h2><div className="summary-lines"><span>Товары · 2</span><span>8 900 ₽</span><span>Доставка</span><span>Бесплатно</span></div><div className="summary-total"><strong>Итого</strong><strong>8 900 ₽</strong></div><label className="field"><span>Промокод</span><input placeholder="Введите промокод" /></label><Link className="button button-primary wide" href="/checkout">Перейти к оформлению</Link><p className="secure"><Icon name="lock" size={18} />Безопасная оплата</p></aside></section></Shell>;
+  return <Shell node="43:55"><section className="two-column cart-page"><div className="cart-list"><h1>Корзина</h1><p className="muted">2 товара</p><CartItem name="Топ Kimono Graphite" meta="Графит · S 40/42" price="4 600 ₽" image="cart-1.png" /><CartItem name="Брюки Flow Navy" meta="Тёмно-синий · M 44/46" price="4 300 ₽" image="cart-2.png" /></div><aside className="summary-card"><h2>Ваш заказ</h2><div className="summary-lines"><span>Товары · 2</span><span>8 900 ₽</span><span>Доставка</span><span>Бесплатно</span></div><div className="summary-total"><strong>Итого</strong><strong>8 900 ₽</strong></div><label className="field"><span>Промокод</span><input placeholder="Введите промокод" /></label><a className="button button-primary wide" href="/checkout">Перейти к оформлению</a><p className="secure"><Icon name="lock" size={18} />Безопасная оплата</p></aside></section></Shell>;
 }
 
 function Field({ label, placeholder, type = 'text' }: { label: string; placeholder: string; type?: string }) { return <label className="field"><span>{label}</span><input type={type} placeholder={placeholder} /></label>; }
