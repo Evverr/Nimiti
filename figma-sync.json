@@ -1,0 +1,27 @@
+{
+  "fileKey": "bZGaiGiAPGttDjV58mr7hW",
+  "fileName": "Landing",
+  "sourcePage": "05 — Screens",
+  "routes": {
+    "/": "43:52",
+    "/catalog": "43:53",
+    "/product": "43:54",
+    "/cart": "43:55",
+    "/checkout": "43:56"
+  },
+  "sharedComponents": {
+    "Header": "41:38",
+    "Logo": "34:553",
+    "ProductCard": "41:26",
+    "Button": "39:38",
+    "Input": "40:59",
+    "Chip": "40:64",
+    "Quantity": "40:65",
+    "CartItem": "44:41"
+  },
+  "implementation": {
+    "screens": "app/store.tsx",
+    "tokens": "app/globals.css",
+    "assets": "public/minti"
+  }
+}
