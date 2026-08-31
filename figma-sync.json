@@ -19,6 +19,16 @@
     "Quantity": "40:65",
     "CartItem": "44:41"
   },
+  "componentVariants": {
+    "ButtonDangerDefault": "49:20",
+    "ButtonDangerHover": "49:26",
+    "ButtonDangerDisabled": "49:32"
+  },
+  "lastReview": {
+    "date": "2026-08-31",
+    "result": "passed",
+    "notes": "Screen node IDs are stable; Logo and Hero exports match; Minti variables resolve on all screens. Danger button variants were added without breaking existing instances."
+  },
   "implementation": {
     "screens": "app/store.tsx",
     "tokens": "app/globals.css",
