@@ -32,6 +32,7 @@
   "implementation": {
     "screens": "app/store.tsx",
     "tokens": "app/globals.css",
-    "assets": "public/minti"
+    "images": "public/minti/images",
+    "icons": "public/minti/icons"
   }
 }

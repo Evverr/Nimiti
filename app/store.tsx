@@ -2,7 +2,8 @@
 
 import { useEffect, useMemo, useState } from 'react';
 
-const ASSET = '/minti';
+const IMAGE_ASSET = '/minti/images';
+const ICON_ASSET = '/minti/icons';
 
 const products = [
   { name: 'Костюм Atlas Navy', price: '8 900 ₽', image: 'product-1.png', badge: 'NEW', category: 'Костюмы' },
@@ -18,7 +19,7 @@ const products = [
 type IconName = 'search' | 'user' | 'bag' | 'heart' | 'plus' | 'minus' | 'trash' | 'lock';
 
 function Icon({ name, size = 24, alt = '' }: { name: IconName; size?: number; alt?: string }) {
-  return <img className="minti-icon" src={`${ASSET}/${name}.svg`} width={size} height={size} alt={alt} />;
+  return <img className="minti-icon" src={`${ICON_ASSET}/${name}.svg`} width={size} height={size} alt={alt} />;
 }
 
 function ChipWithIcon({ children }: { children: React.ReactNode }) {
@@ -26,7 +27,7 @@ function ChipWithIcon({ children }: { children: React.ReactNode }) {
     <button className="chip chip-with-icon" type="button" data-figma-node="59:2701">
       <span>{children}</span>
       <span className="chip-icon-box" aria-hidden="true">
-        <img className="chip-chevron" src={`${ASSET}/chevron-down.svg`} alt="" />
+        <img className="chip-chevron" src={`${ICON_ASSET}/chevron-down.svg`} alt="" />
       </span>
     </button>
   );
@@ -71,7 +72,7 @@ export function Header() {
           title={isDark ? 'Светлая тема' : 'Тёмная тема'}
           data-figma-node="34:553"
         >
-          <img src={`${ASSET}/logo.svg`} width="146" height="36" alt="Minti" />
+          <img src={`${ICON_ASSET}/logo.svg`} width="146" height="36" alt="Minti" />
         </button>
         <nav className="desktop-nav" aria-label="Основная навигация">
           {pages.map((page) => (
@@ -103,7 +104,7 @@ export function HomeScreen() {
   return (
     <Shell node="43:52">
       <section className="hero" data-figma-node="43:92">
-        <img className="hero-image" src={`${ASSET}/hero.png`} alt="Медицинские специалисты в форме Minti" />
+        <img className="hero-image" src={`${IMAGE_ASSET}/hero.png`} alt="Медицинские специалисты в форме Minti" />
         <div className="hero-shade" />
         <div className="hero-content"><span className="hero-accent" /><h1>Создано для тех,<br />кто заботится</h1><p>Профессиональная форма. Честный комфорт. Каждый день.</p><a href="/catalog" className="button button-primary">Смотреть каталог</a></div>
       </section>
@@ -114,7 +115,7 @@ export function HomeScreen() {
 function ProductCard({ product }: { product: (typeof products)[number] }) {
   return (
     <a className="product-card" href="/product" aria-label={`${product.name}, ${product.price}`}>
-      <div className="product-media"><img src={`${ASSET}/${product.image}`} alt={product.name} /><span className="badge">{product.badge}</span><span className="heart"><Icon name="heart" /></span></div>
+      <div className="product-media"><img src={`${IMAGE_ASSET}/${product.image}`} alt={product.name} /><span className="badge">{product.badge}</span><span className="heart"><Icon name="heart" /></span></div>
       <h2>{product.name}</h2><p><strong>{product.price}</strong><span>· 4 цвета</span></p>
     </a>
   );
@@ -146,7 +147,7 @@ export function ProductScreen() {
   return (
     <Shell node="43:54">
       <section className="product-page">
-        <div className="product-detail-media"><img src={`${ASSET}/product-detail.png`} alt="Топ Kimono Graphite" /></div>
+        <div className="product-detail-media"><img src={`${IMAGE_ASSET}/product-detail.png`} alt="Топ Kimono Graphite" /></div>
         <div className="product-info"><p className="eyebrow">MINTI / WOMEN</p><h1>Топ Kimono Graphite</h1><p className="big-price">4 600 ₽</p><span className="installment">1 150 ₽ × 4 платежа&nbsp; ›</span><h2>Цвет: {color}</h2>
           <div className="swatches">{colors.map(([name, hex]) => <button key={name} aria-label={name} className={color === name ? 'active' : ''} style={{ background: hex }} onClick={() => setColor(name)} />)}</div>
           <p className="muted">Параметры модели: Рост 172, 86/61/87<br />Размер на модели: S</p><button className="text-link">Гид по размерам&nbsp; ›</button>
@@ -160,7 +161,7 @@ export function ProductScreen() {
 
 function CartItem({ name, meta, price, image }: { name: string; meta: string; price: string; image: string }) {
   const [quantity, setQuantity] = useState(1); const [visible, setVisible] = useState(true); if (!visible) return null;
-  return <article className="cart-item"><img src={`${ASSET}/${image}`} alt={name} /><div className="cart-copy"><h2>{name}</h2><p>{meta}</p><strong>{price}</strong></div><div className="cart-item-actions"><Quantity value={quantity} onChange={setQuantity} /><button className="trash" onClick={() => setVisible(false)} aria-label={`Удалить ${name}`}><Icon name="trash" /></button></div></article>;
+  return <article className="cart-item"><img src={`${IMAGE_ASSET}/${image}`} alt={name} /><div className="cart-copy"><h2>{name}</h2><p>{meta}</p><strong>{price}</strong></div><div className="cart-item-actions"><Quantity value={quantity} onChange={setQuantity} /><button className="trash" onClick={() => setVisible(false)} aria-label={`Удалить ${name}`}><Icon name="trash" /></button></div></article>;
 }
 
 export function CartScreen() {
@@ -171,5 +172,5 @@ function Field({ label, placeholder, type = 'text' }: { label: string; placehold
 
 export function CheckoutScreen() {
   const [delivery, setDelivery] = useState('Курьер');
-  return <Shell node="43:56"><section className="two-column checkout-page"><form className="checkout-form" onSubmit={(event) => event.preventDefault()}><h1>Оформление заказа</h1><p className="muted">Шаг 1 из 2 · Контакты и доставка</p><h2>Контактные данные</h2><div className="form-grid"><Field label="Имя и фамилия" placeholder="Евгений Ерёмин" /><Field label="Телефон" placeholder="+7 900 000-00-00" type="tel" /><Field label="Email" placeholder="name@example.com" type="email" /><Field label="Город" placeholder="Калининград" /></div><h2>Способ доставки</h2><div className="chips">{['Курьер', 'Самовывоз'].map((item) => <button type="button" key={item} className={`chip ${delivery === item ? 'selected' : ''}`} onClick={() => setDelivery(item)}>{item}</button>)}</div><Field label="Адрес доставки" placeholder="Улица, дом, квартира" /><Field label="Комментарий курьеру" placeholder="Необязательно" /></form><aside className="summary-card checkout-summary"><h2>Ваш заказ</h2><div className="order-product"><img src={`${ASSET}/checkout-product.png`} alt="Топ Kimono Graphite" /><p>Топ Kimono Graphite<br />Графит · S 40/42 · 1 шт.<br />4 600 ₽</p></div><div className="summary-lines"><span>Товары</span><span>4 600 ₽</span><span>Доставка</span><span>Бесплатно</span></div><div className="summary-total"><strong>Итого</strong><strong>4 600 ₽</strong></div><button className="button button-primary wide" type="button">Перейти к оплате</button><p className="secure"><Icon name="lock" size={18} />Данные защищены · SSL</p></aside></section></Shell>;
+  return <Shell node="43:56"><section className="two-column checkout-page"><form className="checkout-form" onSubmit={(event) => event.preventDefault()}><h1>Оформление заказа</h1><p className="muted">Шаг 1 из 2 · Контакты и доставка</p><h2>Контактные данные</h2><div className="form-grid"><Field label="Имя и фамилия" placeholder="Евгений Ерёмин" /><Field label="Телефон" placeholder="+7 900 000-00-00" type="tel" /><Field label="Email" placeholder="name@example.com" type="email" /><Field label="Город" placeholder="Калининград" /></div><h2>Способ доставки</h2><div className="chips">{['Курьер', 'Самовывоз'].map((item) => <button type="button" key={item} className={`chip ${delivery === item ? 'selected' : ''}`} onClick={() => setDelivery(item)}>{item}</button>)}</div><Field label="Адрес доставки" placeholder="Улица, дом, квартира" /><Field label="Комментарий курьеру" placeholder="Необязательно" /></form><aside className="summary-card checkout-summary"><h2>Ваш заказ</h2><div className="order-product"><img src={`${IMAGE_ASSET}/checkout-product.png`} alt="Топ Kimono Graphite" /><p>Топ Kimono Graphite<br />Графит · S 40/42 · 1 шт.<br />4 600 ₽</p></div><div className="summary-lines"><span>Товары</span><span>4 600 ₽</span><span>Доставка</span><span>Бесплатно</span></div><div className="summary-total"><strong>Итого</strong><strong>4 600 ₽</strong></div><button className="button button-primary wide" type="button">Перейти к оплате</button><p className="secure"><Icon name="lock" size={18} />Данные защищены · SSL</p></aside></section></Shell>;
 }
