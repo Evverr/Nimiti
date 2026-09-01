@@ -175,12 +175,25 @@ export function CompactCatalogScreen() {
       <section className="alt-catalog-panel">
         <h1>Женская одежда</h1>
         <div className="alt-catalog-grid" data-figma-node="60:2713">
-          <img src="/graphics/nimiti/catalog-alt/catalog-grid.webp" width="1382" height="1072" alt="Каталог женской медицинской одежды Nimiti" />
-          <div className="alt-product-hotspots">
-            {compactCatalogProducts.map((name, index) => (
-              <a key={`${name}-${index}`} href="/product" aria-label={`Открыть товар: ${name}`} />
-            ))}
-          </div>
+          {compactCatalogProducts.map((name, index) => (
+            <a
+              className="alt-product-card"
+              key={`${name}-${index}`}
+              href="/product"
+              aria-label={`Открыть товар: ${name}`}
+            >
+              <img
+                className="alt-product-sprite"
+                src="/graphics/nimiti/catalog-alt/catalog-grid.webp"
+                alt=""
+                draggable={false}
+                style={{
+                  '--sprite-column': index % 6,
+                  '--sprite-row': Math.floor(index / 6),
+                } as React.CSSProperties}
+              />
+            </a>
+          ))}
         </div>
       </section>
     </main>
