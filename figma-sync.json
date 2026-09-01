@@ -25,9 +25,9 @@
     "ButtonDangerDisabled": "49:32"
   },
   "lastReview": {
-    "date": "2026-08-31",
+    "date": "2026-09-01",
     "result": "passed",
-    "notes": "Screen node IDs are stable; Logo and Hero exports match; Minti variables resolve on all screens. Danger button variants were added without breaking existing instances."
+    "notes": "Synced minti-red-500 from the Danger button variants to #ff1525. Product burgundy swatches remain independent product colors."
   },
   "implementation": {
     "screens": "app/store.tsx",

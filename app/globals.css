@@ -5,6 +5,7 @@
   --minti-color-bg-surface: #fff;
   --minti-color-bg-inverse: #17191d;
   --minti-color-bg-accent: #20d565;
+  --minti-red-500: #ff1525;
   --minti-color-text-primary: #17191d;
   --minti-color-text-secondary: #7b7d82;
   --minti-color-text-inverse: #fff;
@@ -71,6 +72,9 @@ img { display: block; }
 .button:active { transform: scale(.98); }
 .button-primary { color: white; background: var(--minti-color-bg-inverse); }
 .button-primary:hover { background: #292c31; }
+.button-danger { color: white; background: var(--minti-red-500); }
+.button-danger:hover { background: var(--minti-red-500); filter: brightness(.92); }
+.button-danger:disabled { cursor: not-allowed; opacity: .45; }
 .wide { width: 100%; }
 .catalog-page { max-width: 1672px; min-height: calc(100vh - 104px); margin: 0 auto; padding: 64px 120px 100px; }
 .page-heading h1, .cart-list > h1, .checkout-form > h1 { margin: 0; font-size: 52px; line-height: 60px; font-weight: 500; letter-spacing: -.025em; }
