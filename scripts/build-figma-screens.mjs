@@ -9,7 +9,7 @@ await mkdir(outDir, { recursive: true });
 
 const esc = (s) => s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 const svg = (w, h, body) => Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}"><style>
-  text{font-family:Arial,Helvetica,sans-serif}.muted{fill:#7b7d82}.ink{fill:#17191d}.small{font-size:18px}.body{font-size:22px}.label{font-size:20px;font-weight:600}.title{font-size:54px;font-weight:500}.price{font-size:42px;font-weight:600}
+  text{font-family:Inter,Arial,Helvetica,sans-serif}.muted{fill:#7b7d82}.ink{fill:#17191d}.small{font-size:18px}.body{font-size:22px}.label{font-size:20px;font-weight:600}.title{font-size:54px;font-weight:500}.price{font-size:42px;font-weight:600}
   </style>${body}</svg>`);
 
 const header = (dark = false) => {

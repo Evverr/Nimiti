@@ -36,7 +36,7 @@
 
 * { box-sizing: border-box; }
 html, body { margin: 0; background: var(--nimiti-color-bg-page); color: var(--nimiti-color-text-primary); }
-body { font-family: var(--font-geist-sans), Arial, sans-serif; }
+body { font-family: var(--font-inter), Inter, Arial, sans-serif; }
 body, .store-shell, .site-header, .chip, .quantity, .installment, .cart-item, .summary-card, .field input { transition: background-color .25s ease, color .25s ease, border-color .25s ease; }
 button, input { font: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
