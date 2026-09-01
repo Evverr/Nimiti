@@ -88,7 +88,7 @@ export function Header() {
         </nav>
       </div>
       <nav className="header-actions" aria-label="Действия">
-        <a href="/catalog" className="icon-button" aria-label="Поиск"><Icon name="search" /></a>
+        <a href="/catalog-alt" className="icon-button" aria-label="Открыть компактный каталог"><Icon name="search" /></a>
         <a href="/checkout" className="icon-button" aria-label="Профиль"><Icon name="user" /></a>
         <a href="/cart" className="icon-button" aria-label="Корзина"><Icon name="bag" /></a>
       </nav>
@@ -133,6 +133,57 @@ export function CatalogScreen() {
         <div className="catalog-grid">{visible.map((product) => <ProductCard product={product} key={product.name} />)}</div>
       </section>
     </Shell>
+  );
+}
+
+const compactCatalogProducts = [
+  'Жакет Grace Молочный', 'Брюки со стрелками Молочные', 'Брюки со стрелками Белые',
+  'Жакет Select Молочный', 'Брюки со стрелками Мокко', 'Коробка подарочная большая',
+  'Жакет Select Мокко', 'Жакет Select Белый', 'Жакет Grace Мокко',
+  'Жакет Grace Белый', 'Топ Kimono с длинным рукавом', 'Брюки палаццо 111 Кофейные',
+  'Топ Kimono с длинным рукавом', 'Брюки палаццо 111 Белые', 'Сумка Tote Call',
+  'Топ Kimono 112 Космический', 'Брюки палаццо 111 Бордовые', 'Топ Kimono 112 Бордовый',
+];
+
+export function CompactCatalogScreen() {
+  const [favorite, setFavorite] = useState(false);
+  const [bookmarked, setBookmarked] = useState(false);
+
+  return (
+    <main className="alt-catalog-shell" data-figma-node="60:2755">
+      <header className="alt-catalog-header">
+        <a className="alt-header-control" href="/catalog" aria-label="Вернуться в основной каталог">
+          <img src="/graphics/nimiti/catalog-alt/menu.svg" width="36" height="36" alt="" />
+        </a>
+        <a className="alt-catalog-logo" href="/" aria-label="Nimiti — на главную">
+          <img src="/graphics/nimiti/catalog-alt/logo.svg" width="146" height="36" alt="Nimiti" />
+        </a>
+        <div className="alt-header-actions">
+          <button className={bookmarked ? 'selected' : ''} type="button" onClick={() => setBookmarked((value) => !value)} aria-label="Сохранённые товары" aria-pressed={bookmarked}>
+            <img src="/graphics/nimiti/catalog-alt/bookmark.svg" width="36" height="36" alt="" />
+          </button>
+          <button className={favorite ? 'selected' : ''} type="button" onClick={() => setFavorite((value) => !value)} aria-label="Избранное" aria-pressed={favorite}>
+            <img src="/graphics/nimiti/catalog-alt/favorite.svg" width="36" height="36" alt="" />
+          </button>
+        </div>
+      </header>
+
+      <nav className="alt-breadcrumbs" aria-label="Хлебные крошки">
+        <a href="/catalog">Каталог</a><span>—</span><a href="/catalog">Медицинская одежда</a><span>—</span><a href="/catalog">Новые коллекции</a><span>—</span><strong>Женская одежда</strong>
+      </nav>
+
+      <section className="alt-catalog-panel">
+        <h1>Женская одежда</h1>
+        <div className="alt-catalog-grid" data-figma-node="60:2713">
+          <img src="/graphics/nimiti/catalog-alt/catalog-grid.png" width="1382" height="1072" alt="Каталог женской медицинской одежды Nimiti" />
+          <div className="alt-product-hotspots">
+            {compactCatalogProducts.map((name, index) => (
+              <a key={`${name}-${index}`} href="/product" aria-label={`Открыть товар: ${name}`} />
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }
 
