@@ -21,6 +21,17 @@ function Icon({ name, size = 24, alt = '' }: { name: IconName; size?: number; al
   return <img className="minti-icon" src={`${ASSET}/${name}.svg`} width={size} height={size} alt={alt} />;
 }
 
+function ChipWithIcon({ children }: { children: React.ReactNode }) {
+  return (
+    <button className="chip chip-with-icon" type="button" data-figma-node="59:2701">
+      <span>{children}</span>
+      <span className="chip-icon-box" aria-hidden="true">
+        <img className="chip-chevron" src={`${ASSET}/chevron-down.svg`} alt="" />
+      </span>
+    </button>
+  );
+}
+
 export function Header() {
   const [pathname, setPathname] = useState('');
   useEffect(() => setPathname(window.location.pathname), []);
@@ -115,7 +126,7 @@ export function ProductScreen() {
         <div className="product-info"><p className="eyebrow">MINTI / WOMEN</p><h1>Топ Kimono Graphite</h1><p className="big-price">4 600 ₽</p><span className="installment">1 150 ₽ × 4 платежа&nbsp; ›</span><h2>Цвет: {color}</h2>
           <div className="swatches">{colors.map(([name, hex]) => <button key={name} aria-label={name} className={color === name ? 'active' : ''} style={{ background: hex }} onClick={() => setColor(name)} />)}</div>
           <p className="muted">Параметры модели: Рост 172, 86/61/87<br />Размер на модели: S</p><button className="text-link">Гид по размерам&nbsp; ›</button>
-          <div className="product-controls"><button className="chip">S 40/42&nbsp; ⌄</button><Quantity value={quantity} onChange={setQuantity} /></div>
+          <div className="product-controls"><ChipWithIcon>S 40/42</ChipWithIcon><Quantity value={quantity} onChange={setQuantity} /></div>
           <a className="button button-primary" href="/cart">Добавить в корзину · {quantity * 4600} ₽</a><button className="info-link">Намекнуть о подарке&nbsp; ›</button><button className="info-link">Узнать наличие в магазине&nbsp; ›</button><p className="muted about">О товаре<br />Мягкая дышащая ткань, свободная посадка и функциональные карманы для долгой смены.</p>
         </div>
       </section>

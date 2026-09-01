@@ -65,6 +65,9 @@ img { display: block; }
 .chip { height: 48px; padding: 0 var(--minti-spacing-6); border: 1px solid var(--minti-color-border-default); border-radius: var(--minti-radius-full); background: white; cursor: pointer; transition: .18s ease; white-space: nowrap; }
 .chip:hover { transform: translateY(-1px); }
 .chip.selected { border-color: var(--minti-color-bg-inverse); background: var(--minti-color-bg-inverse); color: white; }
+.chip-with-icon { padding-left: var(--minti-spacing-6); padding-right: 18px; display: inline-flex; align-items: center; justify-content: center; gap: var(--minti-spacing-3); }
+.chip-icon-box { width: 20px; height: 20px; display: grid; flex: 0 0 20px; place-items: center; }
+.chip-chevron { width: 11.8px; height: 6.8px; }
 .catalog-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 44px 24px; margin-top: 40px; }
 .product-card { min-width: 0; }
 .product-media { position: relative; width: 100%; aspect-ratio: 330/390; overflow: hidden; border-radius: var(--minti-radius-md); background: #ececeb; }
