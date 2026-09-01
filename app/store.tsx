@@ -2,8 +2,8 @@
 
 import { useEffect, useMemo, useState } from 'react';
 
-const IMAGE_ASSET = '/minti/images';
-const ICON_ASSET = '/minti/icons';
+const IMAGE_ASSET = '/graphics/nimiti/images';
+const ICON_ASSET = '/graphics/nimiti/icons';
 
 const products = [
   { name: 'Костюм Atlas Navy', price: '8 900 ₽', image: 'product-1.png', badge: 'NEW', category: 'Костюмы' },
@@ -19,7 +19,7 @@ const products = [
 type IconName = 'search' | 'user' | 'bag' | 'heart' | 'plus' | 'minus' | 'trash' | 'lock';
 
 function Icon({ name, size = 24, alt = '' }: { name: IconName; size?: number; alt?: string }) {
-  return <img className="minti-icon" src={`${ICON_ASSET}/${name}.svg`} width={size} height={size} alt={alt} />;
+  return <img className="nimiti-icon" src={`${ICON_ASSET}/${name}.svg`} width={size} height={size} alt={alt} />;
 }
 
 function ChipWithIcon({ children }: { children: React.ReactNode }) {
@@ -38,7 +38,7 @@ export function Header() {
   const [isDark, setIsDark] = useState(false);
   useEffect(() => {
     setPathname(window.location.pathname);
-    const savedTheme = window.localStorage.getItem('minti-theme');
+    const savedTheme = window.localStorage.getItem('nimiti-theme');
     const darkTheme = savedTheme === 'dark';
     setIsDark(darkTheme);
     document.documentElement.dataset.theme = darkTheme ? 'dark' : 'light';
@@ -48,7 +48,7 @@ export function Header() {
     setIsDark((currentTheme) => {
       const darkTheme = !currentTheme;
       document.documentElement.dataset.theme = darkTheme ? 'dark' : 'light';
-      window.localStorage.setItem('minti-theme', darkTheme ? 'dark' : 'light');
+      window.localStorage.setItem('nimiti-theme', darkTheme ? 'dark' : 'light');
       return darkTheme;
     });
   }
@@ -72,7 +72,7 @@ export function Header() {
           title={isDark ? 'Светлая тема' : 'Тёмная тема'}
           data-figma-node="34:553"
         >
-          <img src={`${ICON_ASSET}/logo.svg`} width="146" height="36" alt="Minti" />
+          <img src={`${ICON_ASSET}/logo.svg`} width="146" height="36" alt="Nimiti" />
         </button>
         <nav className="desktop-nav" aria-label="Основная навигация">
           {pages.map((page) => (
@@ -104,7 +104,7 @@ export function HomeScreen() {
   return (
     <Shell node="43:52">
       <section className="hero" data-figma-node="43:92">
-        <img className="hero-image" src={`${IMAGE_ASSET}/hero.png`} alt="Медицинские специалисты в форме Minti" />
+        <img className="hero-image" src={`${IMAGE_ASSET}/hero.png`} alt="Медицинские специалисты в форме Nimiti" />
         <div className="hero-shade" />
         <div className="hero-content"><span className="hero-accent" /><h1>Создано для тех,<br />кто заботится</h1><p>Профессиональная форма. Честный комфорт. Каждый день.</p><a href="/catalog" className="button button-primary">Смотреть каталог</a></div>
       </section>
@@ -148,7 +148,7 @@ export function ProductScreen() {
     <Shell node="43:54">
       <section className="product-page">
         <div className="product-detail-media"><img src={`${IMAGE_ASSET}/product-detail.png`} alt="Топ Kimono Graphite" /></div>
-        <div className="product-info"><p className="eyebrow">MINTI / WOMEN</p><h1>Топ Kimono Graphite</h1><p className="big-price">4 600 ₽</p><span className="installment">1 150 ₽ × 4 платежа&nbsp; ›</span><h2>Цвет: {color}</h2>
+        <div className="product-info"><p className="eyebrow">NIMITI / WOMEN</p><h1>Топ Kimono Graphite</h1><p className="big-price">4 600 ₽</p><span className="installment">1 150 ₽ × 4 платежа&nbsp; ›</span><h2>Цвет: {color}</h2>
           <div className="swatches">{colors.map(([name, hex]) => <button key={name} aria-label={name} className={color === name ? 'active' : ''} style={{ background: hex }} onClick={() => setColor(name)} />)}</div>
           <p className="muted">Параметры модели: Рост 172, 86/61/87<br />Размер на модели: S</p><button className="text-link">Гид по размерам&nbsp; ›</button>
           <div className="product-controls"><ChipWithIcon>S 40/42</ChipWithIcon><Quantity value={quantity} onChange={setQuantity} /></div>

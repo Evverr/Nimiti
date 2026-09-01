@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Minti — медицинская одежда',
+  title: 'Nimiti — медицинская одежда',
   description: 'Профессиональная медицинская форма с честным комфортом на каждый день.',
 };
 

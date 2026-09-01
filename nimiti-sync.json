@@ -27,12 +27,12 @@
   "lastReview": {
     "date": "2026-09-01",
     "result": "passed",
-    "notes": "Verified minti-red-500 at #ff1525 and applied the Danger variant to the cart checkout CTA. Product burgundy swatches remain independent product colors."
+    "notes": "Verified nimiti-red-500 at #ff1525 and applied the Danger variant to the cart checkout CTA. Product burgundy swatches remain independent product colors."
   },
   "implementation": {
     "screens": "app/store.tsx",
     "tokens": "app/globals.css",
-    "images": "public/minti/images",
-    "icons": "public/minti/icons"
+    "images": "public/graphics/nimiti/images",
+    "icons": "public/graphics/nimiti/icons"
   }
 }
