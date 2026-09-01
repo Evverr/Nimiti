@@ -12,8 +12,8 @@ const products = [
   { name: 'Костюм Air Blue', price: '7 400 ₽', image: 'product-4.png', badge: 'PRO', category: 'Костюмы' },
   { name: 'Топ Kimono Graphite', price: '4 600 ₽', image: 'product-5.png', badge: 'PRO', category: 'Топы' },
   { name: 'Костюм Line Burgundy', price: '8 200 ₽', image: 'product-6.png', badge: 'PRO', category: 'Костюмы' },
-  { name: 'Брюки Flow Navy', price: '4 300 ₽', image: 'product-7.png', badge: 'PRO', category: 'Брюки' },
-  { name: 'Жакет Select White', price: '9 600 ₽', image: 'product-8.png', badge: 'PRO', category: 'Халаты' },
+  { name: 'Брюки Flow Navy', price: '4 300 ₽', image: 'product-7.webp', badge: 'PRO', category: 'Брюки' },
+  { name: 'Жакет Select White', price: '9 600 ₽', image: 'product-8.webp', badge: 'PRO', category: 'Халаты' },
 ];
 
 type IconName = 'search' | 'user' | 'bag' | 'heart' | 'plus' | 'minus' | 'trash' | 'lock';
@@ -104,7 +104,7 @@ export function HomeScreen() {
   return (
     <Shell node="43:52">
       <section className="hero" data-figma-node="43:92">
-        <img className="hero-image" src={`${IMAGE_ASSET}/hero.png`} alt="Медицинские специалисты в форме Nimiti" />
+        <img className="hero-image" src={`${IMAGE_ASSET}/hero.webp`} alt="Медицинские специалисты в форме Nimiti" />
         <div className="hero-shade" />
         <div className="hero-content"><span className="hero-accent" /><h1>Создано для тех,<br />кто заботится</h1><p>Профессиональная форма. Честный комфорт. Каждый день.</p><a href="/catalog" className="button button-primary">Смотреть каталог</a></div>
       </section>
@@ -175,7 +175,7 @@ export function CompactCatalogScreen() {
       <section className="alt-catalog-panel">
         <h1>Женская одежда</h1>
         <div className="alt-catalog-grid" data-figma-node="60:2713">
-          <img src="/graphics/nimiti/catalog-alt/catalog-grid.png" width="1382" height="1072" alt="Каталог женской медицинской одежды Nimiti" />
+          <img src="/graphics/nimiti/catalog-alt/catalog-grid.webp" width="1382" height="1072" alt="Каталог женской медицинской одежды Nimiti" />
           <div className="alt-product-hotspots">
             {compactCatalogProducts.map((name, index) => (
               <a key={`${name}-${index}`} href="/product" aria-label={`Открыть товар: ${name}`} />

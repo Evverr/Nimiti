@@ -109,8 +109,8 @@ img { display: block; }
 .alt-catalog-grid { position: relative; width: 100%; overflow: hidden; }
 .alt-catalog-grid > img { width: 100%; height: auto; aspect-ratio: 1382 / 1072; object-fit: cover; }
 .alt-product-hotspots { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(3, 1fr); gap: 2.5% 1%; }
-.alt-product-hotspots a { border-radius: 10px; outline: 0 solid transparent; transition: background .18s ease, outline-color .18s ease; }
-.alt-product-hotspots a:hover { background: rgba(32,213,101,.06); outline: 2px solid rgba(32,213,101,.28); }
+.alt-product-hotspots a { border-radius: 10px; cursor: pointer; outline: 0 solid transparent; }
+.alt-product-hotspots a:hover { background: transparent; }
 .alt-product-hotspots a:focus-visible { outline: 3px solid var(--nimiti-color-bg-accent); outline-offset: -3px; }
 .product-card { min-width: 0; }
 .product-media { position: relative; width: 100%; aspect-ratio: 330/390; overflow: hidden; border-radius: var(--nimiti-radius-md); background: #ececeb; }
