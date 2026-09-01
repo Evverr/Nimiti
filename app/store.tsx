@@ -34,7 +34,23 @@ function ChipWithIcon({ children }: { children: React.ReactNode }) {
 
 export function Header() {
   const [pathname, setPathname] = useState('');
-  useEffect(() => setPathname(window.location.pathname), []);
+  const [isDark, setIsDark] = useState(false);
+  useEffect(() => {
+    setPathname(window.location.pathname);
+    const savedTheme = window.localStorage.getItem('minti-theme');
+    const darkTheme = savedTheme === 'dark';
+    setIsDark(darkTheme);
+    document.documentElement.dataset.theme = darkTheme ? 'dark' : 'light';
+  }, []);
+
+  function toggleTheme() {
+    setIsDark((currentTheme) => {
+      const darkTheme = !currentTheme;
+      document.documentElement.dataset.theme = darkTheme ? 'dark' : 'light';
+      window.localStorage.setItem('minti-theme', darkTheme ? 'dark' : 'light');
+      return darkTheme;
+    });
+  }
   const pages = [
     { href: '/', label: 'Главная' },
     { href: '/catalog', label: 'Каталог' },
@@ -46,9 +62,17 @@ export function Header() {
   return (
     <header className="site-header" data-figma-node="41:38">
       <div className="header-left">
-        <a href="/" className="logo-link" aria-label="Minti — на главную" data-figma-node="34:553">
+        <button
+          className="logo-link theme-toggle"
+          type="button"
+          onClick={toggleTheme}
+          aria-label={isDark ? 'Включить светлую тему' : 'Включить тёмную тему'}
+          aria-pressed={isDark}
+          title={isDark ? 'Светлая тема' : 'Тёмная тема'}
+          data-figma-node="34:553"
+        >
           <img src={`${ASSET}/logo.svg`} width="146" height="36" alt="Minti" />
-        </a>
+        </button>
         <nav className="desktop-nav" aria-label="Основная навигация">
           {pages.map((page) => (
             <a
