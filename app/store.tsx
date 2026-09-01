@@ -160,10 +160,10 @@ export function CompactCatalogScreen() {
         </a>
         <div className="alt-header-actions">
           <button className={bookmarked ? 'selected' : ''} type="button" onClick={() => setBookmarked((value) => !value)} aria-label="Сохранённые товары" aria-pressed={bookmarked}>
-            <img src="/graphics/nimiti/catalog-alt/bookmark.svg" width="36" height="36" alt="" />
+            <img src="/graphics/nimiti/catalog-alt/bookmark.svg" width="32" height="32" alt="" />
           </button>
           <button className={favorite ? 'selected' : ''} type="button" onClick={() => setFavorite((value) => !value)} aria-label="Избранное" aria-pressed={favorite}>
-            <img src="/graphics/nimiti/catalog-alt/favorite.svg" width="36" height="36" alt="" />
+            <img src="/graphics/nimiti/catalog-alt/favorite.svg" width="32" height="32" alt="" />
           </button>
         </div>
       </header>
