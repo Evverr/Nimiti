@@ -1,5 +1,5 @@
-import { CatalogScreen } from '../store';
+import { CompactCatalogScreen } from '../store';
 
 export default function CatalogPage() {
-  return <CatalogScreen />;
+  return <CompactCatalogScreen />;
 }
