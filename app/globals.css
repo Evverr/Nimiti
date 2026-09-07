@@ -167,11 +167,11 @@ img { display: block; }
 .search-trigger svg { width: 25.6px; height: 25.6px; }
 .alt-header-actions .search-trigger { color: #9fa3a9; }
 .alt-header-actions .search-trigger:hover, .alt-header-actions .search-trigger:focus-visible { color: #000; opacity: 1; }
-.search-popup { position: fixed; inset: auto; width: min(420px, calc(100vw - 40px)); max-height: calc(100svh - 124px); margin: 0; padding: 32px; overflow: auto; border: 0; border-radius: 20px; background: #fff; color: #17191d; box-shadow: 0 16px 48px #17191d26; }
+.search-popup { position: fixed; inset: auto; width: min(420px, calc(100vw - 40px)); max-height: calc(100svh - 124px); margin: 0; padding: 22px; overflow: auto; border: 0; border-radius: 20px; background: #fff; color: #17191d; box-shadow: 0 16px 48px #17191d26; }
 .search-field { position: relative; display: block; }
-.search-field input { width: 100%; height: 56px; padding: 0 52px 0 18px; border: 1px solid #e0e0e0; border-radius: 999px; background: #f7f7f7; color: #17191d; outline: none; font-size: 16px; }
+.search-field input { width: 100%; height: 56px; padding: 0 42px 0 8px; border: 1px solid #e0e0e0; border-radius: 999px; background: #f7f7f7; color: #17191d; outline: none; font-size: 16px; }
 .search-field input:focus { border-color: #9fa3a9; }
-.search-field > svg { position: absolute; right: 15.2px; top: 15.2px; width: 25.6px; height: 25.6px; pointer-events: none; color: #9fa3a9; }
+.search-field > svg { position: absolute; right: 5.2px; top: 15.2px; width: 25.6px; height: 25.6px; pointer-events: none; color: #9fa3a9; }
 .search-results { display: grid; gap: 4px; margin-top: 12px; }
 .search-results a { display: grid; gap: 4px; padding: 12px; border-radius: 12px; font-size: 16px; }
 .search-results a:hover { background: #f7f7f7; }
