@@ -132,9 +132,18 @@ function HeaderSearch() {
   const [query, setQuery] = useState('');
   const [position, setPosition] = useState({ top: 6, right: 0 });
   const matches = compactCatalogProducts.filter((product) => product.name.toLocaleLowerCase('ru').includes(query.trim().toLocaleLowerCase('ru')));
+  const alignSearchPopup = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const iconCenterX = rect.left + rect.width / 2;
+    const iconCenterY = rect.top + rect.height / 2;
+    setPosition({
+      top: iconCenterY - 50,
+      right: window.innerWidth - iconCenterX - 50,
+    });
+  };
   return (
     <div className="header-search">
-      <button className="search-trigger" type="button" popoverTarget={id} onClick={(event) => { const rect = event.currentTarget.getBoundingClientRect(); setPosition({ top: rect.top + rect.height / 2 - 60, right: window.innerWidth - rect.right - 44 }); }} aria-label="Открыть поиск"><SearchGlyph /></button>
+      <button className="search-trigger" type="button" popoverTarget={id} onClick={alignSearchPopup} aria-label="Открыть поиск"><SearchGlyph /></button>
       <div id={id} popover="auto" className="search-popup" style={position} role="dialog" aria-label="Поиск товаров">
         <label className="search-field">
           <span className="sr-only">Поиск товаров</span>
