@@ -178,7 +178,10 @@ function ModernHeader({ dark, onThemeToggle }: { dark: boolean; onThemeToggle: (
         <button className="alt-header-control" type="button" aria-label="Открыть меню каталога" aria-haspopup="true"><img src="/graphics/nimiti/catalog-menu/menu.svg" width="36" height="36" alt="" /></button>
         <CatalogPopup />
       </div>
-      <a className="alt-catalog-logo" href="/" aria-label="Minti — на главную"><img src={dark ? '/graphics/nimiti/home-alt/logo.svg' : '/graphics/nimiti/catalog-alt/logo.svg'} width="185" height="45" alt="Minti" /></a>
+      <a className="alt-catalog-logo" href="/" aria-label="Minti — на главную">
+        <img className="catalog-logo-light" src="/graphics/nimiti/catalog-alt/logo.svg" width="185" height="45" alt="Minti" />
+        <img className="catalog-logo-dark" src="/graphics/nimiti/home-alt/logo.svg" width="185" height="45" alt="" aria-hidden="true" />
+      </a>
       <div className="alt-header-actions">
         <button className={dark ? 'selected' : ''} type="button" onClick={onThemeToggle} aria-label="Переключить тёмную тему" aria-pressed={dark}>
           <img src="/graphics/nimiti/catalog-alt/bookmark.svg" width="32" height="32" alt="" />
@@ -215,7 +218,8 @@ export function CompactCatalogScreen() {
           <CatalogPopup />
         </div>
         <a className="alt-catalog-logo" href="/" aria-label="Minti — на главную">
-          <img src={darkTheme ? '/graphics/nimiti/home-alt/logo.svg' : '/graphics/nimiti/catalog-alt/logo.svg'} width="185" height="45" alt="Minti" />
+          <img className="catalog-logo-light" src="/graphics/nimiti/catalog-alt/logo.svg" width="185" height="45" alt="Minti" />
+          <img className="catalog-logo-dark" src="/graphics/nimiti/home-alt/logo.svg" width="185" height="45" alt="" aria-hidden="true" />
         </a>
         <div className="alt-header-actions">
           <button className={darkTheme ? 'selected' : ''} type="button" onClick={toggleTheme} aria-label="Переключить тёмную тему" aria-pressed={darkTheme}>
