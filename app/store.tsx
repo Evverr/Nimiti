@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useId, useState } from 'react';
+import { useId, useLayoutEffect, useState } from 'react';
 
 const IMAGE_ASSET = '/graphics/nimiti/images';
 const ICON_ASSET = '/graphics/nimiti/icons';
@@ -167,8 +167,24 @@ function applyTheme(dark: boolean) {
   window.localStorage.setItem('nimiti-theme', dark ? 'dark' : 'light');
 }
 
-function getInitialTheme() {
-  return typeof window !== 'undefined' && getSavedTheme();
+function useTheme() {
+  const [dark, setDark] = useState(false);
+
+  useLayoutEffect(() => {
+    const savedTheme = getSavedTheme();
+    setDark(savedTheme);
+    applyTheme(savedTheme);
+  }, []);
+
+  const toggleTheme = () => {
+    setDark((currentTheme) => {
+      const nextTheme = !currentTheme;
+      applyTheme(nextTheme);
+      return nextTheme;
+    });
+  };
+
+  return { dark, toggleTheme };
 }
 
 function ModernHeader({ dark, onThemeToggle }: { dark: boolean; onThemeToggle: () => void }) {
@@ -193,20 +209,12 @@ function ModernHeader({ dark, onThemeToggle }: { dark: boolean; onThemeToggle: (
 }
 
 function ModernShell({ children, current, node }: { children: React.ReactNode; current: string; node: string }) {
-  const [dark, setDark] = useState(getInitialTheme);
-  useEffect(() => {
-    applyTheme(dark);
-  }, [dark]);
-  const toggleTheme = () => setDark((value) => !value);
+  const { dark, toggleTheme } = useTheme();
   return <main className={`alt-catalog-shell modern-shell ${dark ? 'dark' : ''}`} data-figma-node={node}><ModernHeader dark={dark} onThemeToggle={toggleTheme} /><nav className="alt-breadcrumbs" aria-label="Хлебные крошки"><a href="/catalog">Каталог</a><span>—</span><a href="/catalog">Медицинская одежда</a><span>—</span><a href="/catalog">Новые коллекции</a><span>—</span><a href="/catalog">Женская одежда</a><span>—</span><strong>{current}</strong></nav>{children}</main>;
 }
 
 export function CompactCatalogScreen() {
-  const [darkTheme, setDarkTheme] = useState(getInitialTheme);
-  useEffect(() => {
-    applyTheme(darkTheme);
-  }, [darkTheme]);
-  const toggleTheme = () => setDarkTheme((value) => !value);
+  const { dark: darkTheme, toggleTheme } = useTheme();
 
   return (
     <main className={`alt-catalog-shell ${darkTheme ? 'dark' : ''}`} data-figma-node="96:1162">
