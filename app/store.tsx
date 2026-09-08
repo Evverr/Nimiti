@@ -241,7 +241,7 @@ export function CompactCatalogScreen() {
               data-figma-node="96:1245"
             >
               <span className="alt-product-media" aria-hidden="true">
-                <img className="alt-product-photo" src={product.image} alt="" />
+                <img className="alt-product-photo" src={product.image} alt="" draggable={false} />
                 <img className="alt-product-bookmark" src="/graphics/nimiti/catalog-alt/product-bookmark.svg" width="32" height="32" alt="" />
               </span>
               <h2>{product.name}</h2>
@@ -259,7 +259,7 @@ function Quantity({ value, onChange }: { value: number; onChange: (value: number
 }
 
 function ProductStrip({ title }: { title: string }) {
-  return <section className="modern-panel product-strip"><h2>{title}</h2><div className="product-strip-grid">{compactCatalogProducts.slice(0, 5).map((product) => <a className="alt-product-card" href="/product" key={`${title}-${product.id}`}><span className="alt-product-media"><img className="alt-product-photo" src={product.image} alt={product.name} /><img className="alt-product-bookmark" src="/graphics/nimiti/catalog-alt/product-bookmark.svg" width="32" height="32" alt="" /></span><h3>{product.name}</h3><p><strong>{product.price}</strong>{product.colors && <span>{product.colors}</span>}</p></a>)}</div></section>;
+  return <section className="modern-panel product-strip"><h2>{title}</h2><div className="product-strip-grid">{compactCatalogProducts.slice(0, 5).map((product) => <a className="alt-product-card" href="/product" key={`${title}-${product.id}`}><span className="alt-product-media"><img className="alt-product-photo" src={product.image} alt={product.name} draggable={false} /><img className="alt-product-bookmark" src="/graphics/nimiti/catalog-alt/product-bookmark.svg" width="32" height="32" alt="" /></span><h3>{product.name}</h3><p><strong>{product.price}</strong>{product.colors && <span>{product.colors}</span>}</p></a>)}</div></section>;
 }
 
 export function ProductScreen() {
