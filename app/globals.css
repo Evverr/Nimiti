@@ -130,7 +130,8 @@ img { display: block; }
 .theme-toggle-icon { width: 32px; height: 32px; display: block; background: #1f1f1f; -webkit-mask: url('/graphics/nimiti/catalog-alt/bookmark.svg') center / contain no-repeat; mask: url('/graphics/nimiti/catalog-alt/bookmark.svg') center / contain no-repeat; }
 .alt-header-actions button:hover { opacity: .55; }
 .alt-header-actions button:active { transform: scale(.92); }
-.alt-header-actions button.selected { opacity: .35; }
+.alt-header-actions button.selected { opacity: 1; }
+.alt-header-actions button:focus-visible { outline: 2px solid #9fa3a9; outline-offset: 3px; border-radius: 4px; }
 .alt-breadcrumbs { width: 100%; max-width: 1502px; height: 82px; margin: 0 auto; padding-top: 28px; display: flex; align-items: flex-start; gap: 9px; overflow-x: auto; color: #9fa3a9; font-size: 17px; line-height: 18px; white-space: nowrap; scrollbar-width: none; }
 .alt-breadcrumbs::-webkit-scrollbar { display: none; }
 .alt-breadcrumbs strong { color: #4b4f56; font-weight: 500; }
