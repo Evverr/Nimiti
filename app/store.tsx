@@ -184,7 +184,7 @@ function ModernHeader({ dark, onThemeToggle }: { dark: boolean; onThemeToggle: (
       </a>
       <div className="alt-header-actions">
         <button className={dark ? 'selected' : ''} type="button" onClick={onThemeToggle} aria-label="Переключить тёмную тему" aria-pressed={dark}>
-          <img src="/graphics/nimiti/catalog-alt/bookmark.svg" width="32" height="32" alt="" />
+          <span className="theme-toggle-icon" aria-hidden="true" />
         </button>
         <HeaderSearch />
       </div>
@@ -223,7 +223,7 @@ export function CompactCatalogScreen() {
         </a>
         <div className="alt-header-actions">
           <button className={darkTheme ? 'selected' : ''} type="button" onClick={toggleTheme} aria-label="Переключить тёмную тему" aria-pressed={darkTheme}>
-            <img src="/graphics/nimiti/catalog-alt/bookmark.svg" width="32" height="32" alt="" />
+            <span className="theme-toggle-icon" aria-hidden="true" />
           </button>
           <HeaderSearch />
         </div>
