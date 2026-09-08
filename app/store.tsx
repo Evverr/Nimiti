@@ -198,7 +198,7 @@ function ModernShell({ children, current, node }: { children: React.ReactNode; c
     applyTheme(dark);
   }, [dark]);
   const toggleTheme = () => setDark((value) => !value);
-  return <main className="alt-catalog-shell modern-shell" data-figma-node={node}><ModernHeader dark={dark} onThemeToggle={toggleTheme} /><nav className="alt-breadcrumbs" aria-label="Хлебные крошки"><a href="/catalog">Каталог</a><span>—</span><a href="/catalog">Медицинская одежда</a><span>—</span><a href="/catalog">Новые коллекции</a><span>—</span><a href="/catalog">Женская одежда</a><span>—</span><strong>{current}</strong></nav>{children}</main>;
+  return <main className={`alt-catalog-shell modern-shell ${dark ? 'dark' : ''}`} data-figma-node={node}><ModernHeader dark={dark} onThemeToggle={toggleTheme} /><nav className="alt-breadcrumbs" aria-label="Хлебные крошки"><a href="/catalog">Каталог</a><span>—</span><a href="/catalog">Медицинская одежда</a><span>—</span><a href="/catalog">Новые коллекции</a><span>—</span><a href="/catalog">Женская одежда</a><span>—</span><strong>{current}</strong></nav>{children}</main>;
 }
 
 export function CompactCatalogScreen() {
