@@ -158,16 +158,31 @@ function HeaderSearch() {
   );
 }
 
-function ModernHeader({ dark }: { dark: boolean }) {
+function getSavedTheme() {
+  return window.localStorage.getItem('nimiti-theme') === 'dark';
+}
+
+function applyTheme(dark: boolean) {
+  document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+  window.localStorage.setItem('nimiti-theme', dark ? 'dark' : 'light');
+}
+
+function getInitialTheme() {
+  return typeof window !== 'undefined' && getSavedTheme();
+}
+
+function ModernHeader({ dark, onThemeToggle }: { dark: boolean; onThemeToggle: () => void }) {
   return (
     <header className="alt-catalog-header modern-header" data-figma-node="96:901">
       <div className="alt-menu-trigger">
         <button className="alt-header-control" type="button" aria-label="Открыть меню каталога" aria-haspopup="true"><img src="/graphics/nimiti/catalog-menu/menu.svg" width="36" height="36" alt="" /></button>
         <CatalogPopup />
       </div>
-      <a className="alt-catalog-logo" href="/" aria-label="Minti — на главную"><img src={dark ? '/graphics/nimiti/catalog-alt/logo-dark.svg' : '/graphics/nimiti/catalog-alt/logo.svg'} width="185" height="45" alt="Minti" /></a>
+      <a className="alt-catalog-logo" href="/" aria-label="Minti — на главную"><img src={dark ? '/graphics/nimiti/home-alt/logo.svg' : '/graphics/nimiti/catalog-alt/logo.svg'} width="185" height="45" alt="Minti" /></a>
       <div className="alt-header-actions">
-        <a href="/cart" aria-label="Сохранённые товары"><img src="/graphics/nimiti/catalog-alt/bookmark.svg" width="32" height="32" alt="" /></a>
+        <button className={dark ? 'selected' : ''} type="button" onClick={onThemeToggle} aria-label="Переключить тёмную тему" aria-pressed={dark}>
+          <img src="/graphics/nimiti/catalog-alt/bookmark.svg" width="32" height="32" alt="" />
+        </button>
         <HeaderSearch />
       </div>
     </header>
@@ -175,23 +190,20 @@ function ModernHeader({ dark }: { dark: boolean }) {
 }
 
 function ModernShell({ children, current, node }: { children: React.ReactNode; current: string; node: string }) {
-  const [dark, setDark] = useState(false);
+  const [dark, setDark] = useState(getInitialTheme);
   useEffect(() => {
-    const saved = window.localStorage.getItem('nimiti-theme') === 'dark';
-    setDark(saved);
-    document.documentElement.dataset.theme = saved ? 'dark' : 'light';
-  }, []);
-  return <main className="alt-catalog-shell modern-shell" data-figma-node={node}><ModernHeader dark={dark} /><nav className="alt-breadcrumbs" aria-label="Хлебные крошки"><a href="/catalog">Каталог</a><span>—</span><a href="/catalog">Медицинская одежда</a><span>—</span><a href="/catalog">Новые коллекции</a><span>—</span><a href="/catalog">Женская одежда</a><span>—</span><strong>{current}</strong></nav>{children}</main>;
+    applyTheme(dark);
+  }, [dark]);
+  const toggleTheme = () => setDark((value) => !value);
+  return <main className="alt-catalog-shell modern-shell" data-figma-node={node}><ModernHeader dark={dark} onThemeToggle={toggleTheme} /><nav className="alt-breadcrumbs" aria-label="Хлебные крошки"><a href="/catalog">Каталог</a><span>—</span><a href="/catalog">Медицинская одежда</a><span>—</span><a href="/catalog">Новые коллекции</a><span>—</span><a href="/catalog">Женская одежда</a><span>—</span><strong>{current}</strong></nav>{children}</main>;
 }
 
 export function CompactCatalogScreen() {
-  const [bookmarked, setBookmarked] = useState(false);
-  const [darkTheme, setDarkTheme] = useState(false);
+  const [darkTheme, setDarkTheme] = useState(getInitialTheme);
   useEffect(() => {
-    const saved = window.localStorage.getItem('nimiti-theme') === 'dark';
-    setDarkTheme(saved);
-    document.documentElement.dataset.theme = saved ? 'dark' : 'light';
-  }, []);
+    applyTheme(darkTheme);
+  }, [darkTheme]);
+  const toggleTheme = () => setDarkTheme((value) => !value);
 
   return (
     <main className={`alt-catalog-shell ${darkTheme ? 'dark' : ''}`} data-figma-node="96:1162">
@@ -203,10 +215,10 @@ export function CompactCatalogScreen() {
           <CatalogPopup />
         </div>
         <a className="alt-catalog-logo" href="/" aria-label="Minti — на главную">
-          <img src={darkTheme ? '/graphics/nimiti/catalog-alt/logo-dark.svg' : '/graphics/nimiti/catalog-alt/logo.svg'} width="185" height="45" alt="Minti" />
+          <img src={darkTheme ? '/graphics/nimiti/home-alt/logo.svg' : '/graphics/nimiti/catalog-alt/logo.svg'} width="185" height="45" alt="Minti" />
         </a>
         <div className="alt-header-actions">
-          <button className={bookmarked ? 'selected' : ''} type="button" onClick={() => setBookmarked((value) => !value)} aria-label="Сохранённые товары" aria-pressed={bookmarked}>
+          <button className={darkTheme ? 'selected' : ''} type="button" onClick={toggleTheme} aria-label="Переключить тёмную тему" aria-pressed={darkTheme}>
             <img src="/graphics/nimiti/catalog-alt/bookmark.svg" width="32" height="32" alt="" />
           </button>
           <HeaderSearch />
