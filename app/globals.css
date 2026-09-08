@@ -100,6 +100,7 @@ img { display: block; }
 .alt-catalog-shell { --nimiti-color-bg-page: #f6f6f7; --nimiti-color-bg-surface: #fff; --nimiti-color-bg-inverse: #17191d; --nimiti-color-text-primary: #17191d; --nimiti-color-text-secondary: #7b7d82; --nimiti-color-text-inverse: #fff; --nimiti-color-icon-default: #17191d; --nimiti-color-border-default: #d9dbde; --nimiti-color-border-strong: #17191d; min-height: 100vh; padding: 0 var(--header-gutter) 120px; overflow: hidden; background: #f6f6f7; color: #333; transition: background-color .25s ease, color .25s ease; }
 .alt-catalog-header { position: relative; width: 100%; max-width: 1502px; height: 88px; margin: 0 auto; padding-top: 38px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: start; }
 .alt-menu-trigger { position: relative; z-index: 40; width: 36px; height: 36px; }
+.alt-menu-trigger::before { content: ''; position: absolute; inset: -10px; }
 .alt-header-control { position: relative; z-index: 2; width: 36px; height: 36px; padding: 0; border: 0; display: grid; place-items: center; background: transparent; cursor: pointer; }
 .alt-header-control img { width: 36px; height: 36px; object-fit: contain; }
 .catalog-popup { position: absolute; z-index: 1; top: -24px; left: -34px; width: 743px; height: 647px; padding: 24px 34px; border-radius: 16px; overflow: hidden; background: #fff; box-shadow: 0 18px 50px -4px rgba(23,25,29,.12); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .18s ease, visibility 0s linear .18s; }
