@@ -97,7 +97,7 @@ img { display: block; }
 .chip-icon-box { width: 20px; height: 20px; display: grid; flex: 0 0 20px; place-items: center; }
 .chip-chevron { width: 11.8px; height: 6.8px; }
 .catalog-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 44px 24px; margin-top: 40px; }
-.alt-catalog-shell { min-height: 100vh; padding: 0 var(--header-gutter) 120px; overflow: hidden; background: #f6f6f7; color: #333; transition: background-color .25s ease, color .25s ease; }
+.alt-catalog-shell { --nimiti-color-bg-page: #f6f6f7; --nimiti-color-bg-surface: #fff; --nimiti-color-bg-inverse: #17191d; --nimiti-color-text-primary: #17191d; --nimiti-color-text-secondary: #7b7d82; --nimiti-color-text-inverse: #fff; --nimiti-color-icon-default: #17191d; --nimiti-color-border-default: #d9dbde; --nimiti-color-border-strong: #17191d; min-height: 100vh; padding: 0 var(--header-gutter) 120px; overflow: hidden; background: #f6f6f7; color: #333; transition: background-color .25s ease, color .25s ease; }
 .alt-catalog-header { position: relative; width: 100%; max-width: 1502px; height: 88px; margin: 0 auto; padding-top: 38px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: start; }
 .alt-menu-trigger { position: relative; z-index: 40; width: 36px; height: 36px; }
 .alt-header-control { position: relative; z-index: 2; width: 36px; height: 36px; padding: 0; border: 0; display: grid; place-items: center; background: transparent; cursor: pointer; }
@@ -148,7 +148,7 @@ img { display: block; }
 .alt-product-card p { position: relative; z-index: 1; margin: 2px 0 0; display: flex; align-items: baseline; gap: 8px; }
 .alt-product-card p strong { font-size: 16px; line-height: 28px; font-weight: 600; }
 .alt-product-card p span { color: #737373; font-size: 14px; line-height: 20px; font-weight: 400; }
-.alt-catalog-shell.dark { background: #101216; color: #f4f5f6; }
+.alt-catalog-shell.dark { --nimiti-color-bg-page: #101216; --nimiti-color-bg-surface: #1b1e24; --nimiti-color-bg-inverse: #20d565; --nimiti-color-text-primary: #f4f5f6; --nimiti-color-text-secondary: #a8acb3; --nimiti-color-text-inverse: #17191d; --nimiti-color-icon-default: #f4f5f6; --nimiti-color-border-default: #363a43; --nimiti-color-border-strong: #f4f5f6; background: #101216; color: #f4f5f6; }
 .alt-catalog-shell.dark .alt-catalog-panel,
 .alt-catalog-shell.dark .catalog-popup { background: #1b1e24; color: #f4f5f6; }
 .alt-catalog-shell.dark .alt-product-card { color: #f4f5f6; }
