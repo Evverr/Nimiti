@@ -92,9 +92,9 @@ const catalogSubmenuItems = [
   ['Худи', 'question'], ['Шопперы', 'info'], ['Аксессуары', 'search'],
 ] as const;
 
-function CatalogMenuCell({ label, selected = false, icon }: { label: string; selected?: boolean; icon?: string }) {
+function CatalogMenuCell({ label, selected = false, icon, onMouseEnter }: { label: string; selected?: boolean; icon?: string; onMouseEnter?: () => void }) {
   return (
-    <a className={`catalog-menu-cell ${icon ? 'sub' : ''} ${selected ? 'selected' : ''}`} href="/catalog">
+    <a className={`catalog-menu-cell ${icon ? 'sub' : ''} ${selected ? 'selected' : ''}`} href="/catalog" onMouseEnter={onMouseEnter}>
       {icon && <img src={`/graphics/nimiti/catalog-menu/${icon}.svg`} width="28" height="28" alt="" />}
       <span>{label}</span>
       {selected && <img className="catalog-menu-chevron" src="/graphics/nimiti/catalog-menu/chevron-right.svg" width="24" height="24" alt="" />}
@@ -103,17 +103,19 @@ function CatalogMenuCell({ label, selected = false, icon }: { label: string; sel
 }
 
 function CatalogPopup() {
+  const [submenuVisible, setSubmenuVisible] = useState(false);
+
   return (
     <aside className="catalog-popup" aria-label="Категории каталога" data-figma-node="103:1248">
       <div className="catalog-popup-toolbar">
         <img src="/graphics/nimiti/catalog-menu/menu.svg" width="36" height="36" alt="" />
       </div>
-      <div className="catalog-popup-columns">
+      <div className={`catalog-popup-columns ${submenuVisible ? 'submenu-visible' : ''}`} onMouseLeave={() => setSubmenuVisible(false)}>
         <nav className="catalog-popup-main" aria-label="Основные категории">
-          {catalogMenuItems.map((label) => <CatalogMenuCell key={label} label={label} selected={label === 'Одежда'} />)}
+          {catalogMenuItems.map((label) => <CatalogMenuCell key={label} label={label} selected={label === 'Одежда'} onMouseEnter={() => setSubmenuVisible(label === 'Одежда')} />)}
         </nav>
         <span className="catalog-popup-divider" aria-hidden="true" />
-        <nav className="catalog-popup-submenu" aria-label="Медицинская одежда">
+        <nav className="catalog-popup-submenu" aria-label="Медицинская одежда" aria-hidden={!submenuVisible}>
           <h2>Медицинская одежда</h2>
           <div className="catalog-popup-submenu-list">
             {catalogSubmenuItems.map(([label, icon]) => <CatalogMenuCell key={label} label={label} icon={icon} />)}
