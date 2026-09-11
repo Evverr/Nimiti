@@ -1,6 +1,7 @@
 'use client';
 
 import { useId, useLayoutEffect, useState } from 'react';
+import { useFavorites } from './favorites-store';
 
 const IMAGE_ASSET = '/graphics/nimiti/images';
 const ICON_ASSET = '/graphics/nimiti/icons';
@@ -187,7 +188,33 @@ function useTheme() {
   return { dark, toggleTheme };
 }
 
-function ModernHeader({ dark, onThemeToggle }: { dark: boolean; onThemeToggle: () => void }) {
+function BookmarkGlyph({ selected = false }: { selected?: boolean }) {
+  return <img className="bookmark-glyph" src={`/graphics/nimiti/catalog-alt/${selected ? 'bookmark-solid' : 'product-bookmark'}.svg`} width="32" height="32" alt="" />;
+}
+
+function FavoritesLink({ active = false }: { active?: boolean }) {
+  const { favoriteIds } = useFavorites();
+  return <a className="favorites-link" href="/favorites" aria-label="Избранное" aria-current={active ? 'page' : undefined}><BookmarkGlyph selected={active || favoriteIds.length > 0} /></a>;
+}
+
+function CatalogProductCard({ product }: { product: typeof compactCatalogProducts[number] }) {
+  const { favoriteIds, toggleFavorite } = useFavorites();
+  const selected = favoriteIds.includes(product.id);
+  return (
+    <article className="alt-product-card" data-figma-node="96:1245">
+      <a className="alt-product-link" href="/product" aria-label={`${product.name}, ${product.price}`}>
+        <span className="alt-product-media"><img className="alt-product-photo" src={product.image} alt={product.name} draggable={false} /></span>
+        <h2>{product.name}</h2>
+        <p><strong>{product.price}</strong>{product.colors && <span>{product.colors}</span>}</p>
+      </a>
+      <button className="alt-product-bookmark" type="button" onClick={() => toggleFavorite(product.id)} aria-pressed={selected} aria-label={`${selected ? 'Удалить из избранного' : 'Добавить в избранное'}: ${product.name}`}>
+        <BookmarkGlyph selected={selected} />
+      </button>
+    </article>
+  );
+}
+
+function ModernHeader({ dark, onThemeToggle, favoritesActive = false }: { dark: boolean; onThemeToggle: () => void; favoritesActive?: boolean }) {
   return (
     <header className="alt-catalog-header modern-header" data-figma-node="96:901">
       <div className="alt-menu-trigger">
@@ -199,8 +226,9 @@ function ModernHeader({ dark, onThemeToggle }: { dark: boolean; onThemeToggle: (
         <img className="catalog-logo-dark" src="/graphics/nimiti/home-alt/logo.svg" width="185" height="45" alt="" aria-hidden="true" />
       </a>
       <div className="alt-header-actions">
+        <FavoritesLink active={favoritesActive} />
         <button className={dark ? 'selected' : ''} type="button" onClick={onThemeToggle} aria-label="Переключить тёмную тему" aria-pressed={dark}>
-          <span className="theme-toggle-icon" aria-hidden="true" />
+          <svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true"><path d="M26 19A11 11 0 0 1 13 6a11 11 0 1 0 13 13Z" fill="none" stroke="currentColor" strokeWidth="1.8" /></svg>
         </button>
         <HeaderSearch />
       </div>
@@ -213,54 +241,26 @@ function ModernShell({ children, current, node }: { children: React.ReactNode; c
   return <main className={`alt-catalog-shell modern-shell ${dark ? 'dark' : ''}`} data-figma-node={node}><ModernHeader dark={dark} onThemeToggle={toggleTheme} /><nav className="alt-breadcrumbs" aria-label="Хлебные крошки"><a href="/catalog">Каталог</a><span>—</span><a href="/catalog">Медицинская одежда</a><span>—</span><a href="/catalog">Новые коллекции</a><span>—</span><a href="/catalog">Женская одежда</a><span>—</span><strong>{current}</strong></nav>{children}</main>;
 }
 
-export function CompactCatalogScreen() {
+export function CompactCatalogScreen({ favoritesOnly = false }: { favoritesOnly?: boolean }) {
   const { dark: darkTheme, toggleTheme } = useTheme();
+  const { favoriteIds } = useFavorites();
+  const products = favoritesOnly ? compactCatalogProducts.filter((product) => favoriteIds.includes(product.id)) : compactCatalogProducts;
+  const title = favoritesOnly ? 'Избранное' : 'Женская одежда';
 
   return (
     <main className={`alt-catalog-shell ${darkTheme ? 'dark' : ''}`} data-figma-node="96:1162">
-      <header className="alt-catalog-header" data-figma-node="96:901">
-        <div className="alt-menu-trigger">
-          <button className="alt-header-control" type="button" aria-label="Открыть меню каталога" aria-haspopup="true">
-            <img src="/graphics/nimiti/catalog-menu/menu.svg" width="36" height="36" alt="" />
-          </button>
-          <CatalogPopup />
-        </div>
-        <a className="alt-catalog-logo" href="/" aria-label="Minti — на главную">
-          <img className="catalog-logo-light" src="/graphics/nimiti/catalog-alt/logo.svg" width="185" height="45" alt="Minti" />
-          <img className="catalog-logo-dark" src="/graphics/nimiti/home-alt/logo.svg" width="185" height="45" alt="" aria-hidden="true" />
-        </a>
-        <div className="alt-header-actions">
-          <button className={darkTheme ? 'selected' : ''} type="button" onClick={toggleTheme} aria-label="Переключить тёмную тему" aria-pressed={darkTheme}>
-            <span className="theme-toggle-icon" aria-hidden="true" />
-          </button>
-          <HeaderSearch />
-        </div>
-      </header>
-
+      <ModernHeader dark={darkTheme} onThemeToggle={toggleTheme} favoritesActive={favoritesOnly} />
       <nav className="alt-breadcrumbs" aria-label="Хлебные крошки">
-        <a href="/catalog">Каталог</a><span>—</span><a href="/catalog">Медицинская одежда</a><span>—</span><a href="/catalog">Новые коллекции</a><span>—</span><strong>Женская одежда</strong>
+        <a href="/catalog">Каталог</a><span>—</span>
+        {!favoritesOnly && <><a href="/catalog">Медицинская одежда</a><span>—</span><a href="/catalog">Новые коллекции</a><span>—</span></>}
+        <strong>{title}</strong>
       </nav>
-
       <section className="alt-catalog-panel">
-        <h1>Женская одежда</h1>
+        <h1>{title}</h1>
         <div className="alt-catalog-grid" data-figma-node="96:1165">
-          {compactCatalogProducts.map((product) => (
-            <a
-              className="alt-product-card"
-              key={product.id}
-              href="/product"
-              aria-label={`${product.name}, ${product.price}`}
-              data-figma-node="96:1245"
-            >
-              <span className="alt-product-media" aria-hidden="true">
-                <img className="alt-product-photo" src={product.image} alt="" draggable={false} />
-                <img className="alt-product-bookmark" src="/graphics/nimiti/catalog-alt/product-bookmark.svg" width="32" height="32" alt="" />
-              </span>
-              <h2>{product.name}</h2>
-              <p><strong>{product.price}</strong>{product.colors && <span>{product.colors}</span>}</p>
-            </a>
-          ))}
+          {products.map((product) => <CatalogProductCard key={product.id} product={product} />)}
         </div>
+        {favoritesOnly && products.length === 0 && <div className="favorites-empty" role="status"><p>В избранном пока ничего нет</p><a href="/catalog">Перейти в каталог</a></div>}
       </section>
     </main>
   );
@@ -271,7 +271,7 @@ function Quantity({ value, onChange }: { value: number; onChange: (value: number
 }
 
 function ProductStrip({ title }: { title: string }) {
-  return <section className="modern-panel product-strip"><h2>{title}</h2><div className="product-strip-grid">{compactCatalogProducts.slice(0, 5).map((product) => <a className="alt-product-card" href="/product" key={`${title}-${product.id}`}><span className="alt-product-media"><img className="alt-product-photo" src={product.image} alt={product.name} draggable={false} /><img className="alt-product-bookmark" src="/graphics/nimiti/catalog-alt/product-bookmark.svg" width="32" height="32" alt="" /></span><h3>{product.name}</h3><p><strong>{product.price}</strong>{product.colors && <span>{product.colors}</span>}</p></a>)}</div></section>;
+  return <section className="modern-panel product-strip"><h2>{title}</h2><div className="product-strip-grid">{compactCatalogProducts.slice(0, 5).map((product) => <CatalogProductCard key={product.id} product={product} />)}</div></section>;
 }
 
 export function ProductScreen() {
