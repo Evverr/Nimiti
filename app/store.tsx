@@ -235,7 +235,8 @@ function ModernHeader({ favoritesActive = false }: { favoritesActive?: boolean }
 }
 
 function Breadcrumbs({ current, dark, onThemeToggle, compact = false }: { current: string; dark: boolean; onThemeToggle: () => void; compact?: boolean }) {
-  return <nav className="alt-breadcrumbs" aria-label="Хлебные крошки"><a href="/catalog">Каталог</a><span>—</span><button type="button" onClick={onThemeToggle} aria-pressed={dark} aria-label="Переключить тёмную тему">Медицинская одежда</button>{!compact && <><span>—</span><a href="/catalog">Новые коллекции</a><span>—</span><a href="/catalog">Женская одежда</a></>}<span>—</span><strong>{current}</strong></nav>;
+  const themeLabel = dark ? 'Темная тема' : 'Светлая тема';
+  return <nav className="alt-breadcrumbs" aria-label="Хлебные крошки"><a href="/catalog">Каталог</a><span>—</span><button type="button" onClick={onThemeToggle} aria-pressed={dark} aria-label={`Переключить тему, сейчас: ${themeLabel}`}>{themeLabel}</button>{!compact && <><span>—</span><a href="/catalog">Новые коллекции</a><span>—</span><a href="/catalog">Женская одежда</a></>}<span>—</span><strong>{current}</strong></nav>;
 }
 
 function ModernShell({ children, current, node }: { children: React.ReactNode; current: string; node: string }) {
