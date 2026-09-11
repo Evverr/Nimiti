@@ -106,7 +106,7 @@ function CatalogPopup() {
   const [submenuVisible, setSubmenuVisible] = useState(false);
 
   return (
-    <aside className={`catalog-popup ${submenuVisible ? 'submenu-visible' : ''}`} aria-label="Категории каталога" data-figma-node="103:1248">
+    <aside className="catalog-popup" aria-label="Категории каталога" data-figma-node="103:1248">
       <div className="catalog-popup-toolbar">
         <img src="/graphics/nimiti/catalog-menu/menu.svg" width="36" height="36" alt="" />
       </div>
