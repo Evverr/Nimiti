@@ -106,7 +106,7 @@ function CatalogPopup() {
   const [submenuVisible, setSubmenuVisible] = useState(false);
 
   return (
-    <aside className="catalog-popup" aria-label="Категории каталога" data-figma-node="103:1248">
+    <aside className={`catalog-popup ${submenuVisible ? 'submenu-visible' : ''}`} aria-label="Категории каталога" data-figma-node="103:1248">
       <div className="catalog-popup-toolbar">
         <img src="/graphics/nimiti/catalog-menu/menu.svg" width="36" height="36" alt="" />
       </div>
@@ -195,8 +195,7 @@ function BookmarkGlyph({ selected = false }: { selected?: boolean }) {
 }
 
 function FavoritesLink({ active = false }: { active?: boolean }) {
-  const { favoriteIds } = useFavorites();
-  return <a className="favorites-link" href="/favorites" aria-label="Избранное" aria-current={active ? 'page' : undefined}><BookmarkGlyph selected={active || favoriteIds.length > 0} /></a>;
+  return <a className="favorites-link" href="/favorites" aria-label="Избранное" aria-current={active ? 'page' : undefined}><BookmarkGlyph selected={active} /></a>;
 }
 
 function CatalogProductCard({ product }: { product: typeof compactCatalogProducts[number] }) {
