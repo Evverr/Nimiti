@@ -28,7 +28,7 @@ export function HomeScreen() {
     <main className="home-screen" data-figma-node="129:4283">
       <section className="hero" data-figma-node="129:4285">
         <video className="hero-image" autoPlay loop muted playsInline preload="metadata" aria-hidden="true">
-          <source src="/graphics/nimiti/home-alt/hero.mp4" type="video/mp4" />
+          <source src="/graphics/nimiti/home-alt/hero-pingpong.mp4" type="video/mp4" />
         </video>
         <div className="hero-shade" />
         <div className="home-header-shell">
