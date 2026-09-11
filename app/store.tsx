@@ -56,19 +56,19 @@ const compactCatalogProducts = [
   ['Жакет Grace Молочный', '10 000 р', '+2 цвета'],
   ['Брюки со стрелками Молочные', '4 900 р', '+2 цвета'],
   ['Брюки со стрелками Белые', '4 900 р', '+2 цвета'],
-  ['Жакет Select Молочный', '10 000 р', '+2 цвета'],
+  ['Жакет Select Ледяной голубой', '10 000 р', '+2 цвета'],
   ['Брюки со стрелками Мокко', '4 900 р', '+2 цвета'],
   ['Коробка подарочная большая', '1 090 р', ''],
-  ['Жакет Select Мокко', '10 000 р', '+2 цвета'],
+  ['Жакет Select Дымчато-синий', '10 000 р', '+2 цвета'],
   ['Жакет Select Белый', '10 000 р', '+2 цвета'],
-  ['Жакет Grace Мокко', '10 000 р', '+2 цвета'],
-  ['Жакет Grace Белый', '10 000 р', '+2 цвета'],
+  ['Жакет Grace Сливовый', '10 000 р', '+2 цвета'],
+  ['Жакет Grace Шалфей', '10 000 р', '+2 цвета'],
   ['Топ Kimono с длинным рукавом Космический', '4 600 р', '+6 цветов'],
-  ['Брюки палаццо 111 Космические', '4 300 р', '+10 цветов'],
-  ['Топ Kimono с длинным рукавом Белый', '4 600 р', '+6 цветов'],
-  ['Брюки палаццо 111 Белые', '4 300 р', '+10 цветов'],
+  ['Брюки палаццо 111 Тёмно-синие', '4 300 р', '+10 цветов'],
+  ['Топ Kimono с длинным рукавом Лавандовый', '4 600 р', '+6 цветов'],
+  ['Брюки палаццо 111 Стальные', '4 300 р', '+10 цветов'],
   ['Сумка Tote “Call” Изумрудный', '2 700 р', ''],
-  ['Топ Kimono 112 Космический', '4 100 р', '+9 цветов'],
+  ['Топ Kimono 112 Кобальт', '4 100 р', '+9 цветов'],
   ['Брюки палаццо 111 Бордовые', '4 300 р', '+10 цветов'],
   ['Топ Kimono 112 Бордовый', '4 100 р', '+9 цветов'],
 ].map(([name, price, colors], index) => ({
@@ -76,7 +76,7 @@ const compactCatalogProducts = [
   name,
   price,
   colors: [0, 4, 10, 15].includes(index) ? colors : '',
-  image: `/graphics/nimiti/photo-sandbox/photo-${String(index + 1).padStart(2, '0')}.png`,
+  image: `/graphics/nimiti/doctors-cool/photo-${String(index + 1).padStart(2, '0')}.png`,
 }));
 
 const catalogMenuItems = [
@@ -282,7 +282,7 @@ export function ProductScreen() {
     <ModernShell node="129:4441" current="Карточка товара">
       <section className="modern-panel product-page">
         <h1 className="panel-title">Карточка товара</h1>
-        <div className="product-detail-media"><img src="/graphics/nimiti/images/product-detail-new.png" alt="Топ Kimono Graphite" /></div>
+        <div className="product-detail-media"><img src={compactCatalogProducts[10].image} alt="Топ Kimono Graphite" /></div>
         <div className="product-info"><p className="eyebrow">NIMITI / WOMEN</p><h1>Топ Kimono Graphite</h1><p className="big-price">4 600 ₽</p><span className="installment">1 150 ₽ × 4 платежа&nbsp; ›</span><h2>Цвет: {color}</h2>
           <div className="swatches">{colors.map(([name, hex]) => <button key={name} aria-label={name} className={color === name ? 'active' : ''} style={{ background: hex }} onClick={() => setColor(name)} />)}</div>
           <p className="muted">Параметры модели: Рост 172, 86/61/87<br />Размер на модели: S</p><button className="text-link">Гид по размерам&nbsp; ›</button>
@@ -298,11 +298,11 @@ export function ProductScreen() {
 
 function CartItem({ name, meta, price, image }: { name: string; meta: string; price: string; image: string }) {
   const [quantity, setQuantity] = useState(1); const [visible, setVisible] = useState(true); if (!visible) return null;
-  return <article className="cart-item"><img src={`${IMAGE_ASSET}/${image}`} alt={name} /><div className="cart-copy"><h2>{name}</h2><p>{meta}</p><strong>{price}</strong></div><div className="cart-item-actions"><Quantity value={quantity} onChange={setQuantity} /><button className="trash" onClick={() => setVisible(false)} aria-label={`Удалить ${name}`}><Icon name="trash" /></button></div></article>;
+  return <article className="cart-item"><img src={image} alt={name} /><div className="cart-copy"><h2>{name}</h2><p>{meta}</p><strong>{price}</strong></div><div className="cart-item-actions"><Quantity value={quantity} onChange={setQuantity} /><button className="trash" onClick={() => setVisible(false)} aria-label={`Удалить ${name}`}><Icon name="trash" /></button></div></article>;
 }
 
 export function CartScreen() {
-  return <ModernShell node="129:5018" current="Карточка товара"><section className="modern-panel two-column cart-page"><div className="cart-list"><h1>Корзина</h1><CartItem name="Топ Kimono Graphite" meta="Графит · S 40/42" price="4 600 ₽" image="cart-1.png" /><CartItem name="Брюки Flow Navy" meta="Тёмно-синий · M 44/46" price="4 300 ₽" image="cart-2.png" /></div><aside className="summary-card"><h2>Ваш заказ</h2><div className="summary-lines"><span>Товары · 2</span><span>8 900 ₽</span><span>Доставка</span><span>Бесплатно</span></div><div className="summary-total"><strong>Итого</strong><strong>8 900 ₽</strong></div><label className="field"><span>Промокод</span><input placeholder="Введите промокод" /></label><a className="button button-primary wide" href="/checkout" data-figma-node="49:20">Перейти к оформлению</a><p className="secure"><Icon name="lock" size={18} />Безопасная оплата</p></aside></section></ModernShell>;
+  return <ModernShell node="129:5018" current="Карточка товара"><section className="modern-panel two-column cart-page"><div className="cart-list"><h1>Корзина</h1><CartItem name="Топ Kimono Graphite" meta="Графит · S 40/42" price="4 600 ₽" image={compactCatalogProducts[10].image} /><CartItem name="Брюки Flow Navy" meta="Тёмно-синий · M 44/46" price="4 300 ₽" image={compactCatalogProducts[11].image} /></div><aside className="summary-card"><h2>Ваш заказ</h2><div className="summary-lines"><span>Товары · 2</span><span>8 900 ₽</span><span>Доставка</span><span>Бесплатно</span></div><div className="summary-total"><strong>Итого</strong><strong>8 900 ₽</strong></div><label className="field"><span>Промокод</span><input placeholder="Введите промокод" /></label><a className="button button-primary wide" href="/checkout" data-figma-node="49:20">Перейти к оформлению</a><p className="secure"><Icon name="lock" size={18} />Безопасная оплата</p></aside></section></ModernShell>;
 }
 
 function Field({ label, placeholder, type = 'text' }: { label: string; placeholder: string; type?: string }) { return <label className="field"><span>{label}</span><input type={type} placeholder={placeholder} /></label>; }

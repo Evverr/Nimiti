@@ -207,7 +207,9 @@ img { display: block; }
 .product-strip .alt-product-media { width: 260px; height: 360px; }
 .product-strip .alt-product-card h3 { margin: 8px 0 0; overflow: hidden; font-size: 14px; line-height: 20px; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
 .modern-panel.cart-page, .modern-panel.checkout-page { max-width: 1500px; min-height: 870px; padding: 40px; }
-.modern-panel.cart-page { grid-template-columns: minmax(600px, 930px) 430px; gap: 64px; }
+.modern-panel.cart-page { grid-template-columns: minmax(0, 1fr) minmax(300px, 430px); gap: clamp(24px, 4vw, 64px); }
+.cart-list { width: 100%; min-width: 0; }
+.cart-copy { min-width: 0; overflow-wrap: anywhere; }
 .modern-panel.checkout-page { grid-template-columns: minmax(600px, 860px) 500px; gap: 64px; }
 :root[data-theme='dark'] .modern-header .alt-header-control img,
 :root[data-theme='dark'] .modern-header .alt-header-actions img,
@@ -278,7 +280,7 @@ img { display: block; }
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 24px; }
 .order-product { display: flex; align-items: center; gap: 16px; }
 .order-product img { width: 96px; height: 120px; border-radius: 12px; object-fit: cover; background: #F6F6F7; }
-.alt-product-photo, .product-media > img, .product-detail-media img, .order-product img { opacity: 0; }
+.product-media > img, .order-product img { opacity: 0; }
 .order-product p { margin: 0; font-size: 15px; line-height: 24px; }
 :root[data-theme='dark'] .site-header { background: rgba(27,30,36,.96); }
 :root[data-theme='dark'] .logo-link img { filter: brightness(0) invert(1); }
@@ -311,6 +313,7 @@ img { display: block; }
   .modern-panel .product-detail-media { width: 80%; height: auto; aspect-ratio: 760 / 1000; justify-self: center; }
   .product-strip-grid { grid-template-columns: repeat(3, minmax(0, 260px)); }
   .modern-panel.cart-page, .modern-panel.checkout-page { padding: 32px; }
+  .modern-panel.cart-page { grid-template-columns: minmax(0, 1fr); gap: 32px; min-height: 0; }
 }
 @media (min-width: 1101px) and (max-width: 1360px) {
   .alt-catalog-grid { grid-template-columns: repeat(4, minmax(0, 260px)); justify-content: space-between; }
