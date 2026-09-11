@@ -214,7 +214,7 @@ function CatalogProductCard({ product }: { product: typeof compactCatalogProduct
   );
 }
 
-function ModernHeader({ dark, onThemeToggle, favoritesActive = false }: { dark: boolean; onThemeToggle: () => void; favoritesActive?: boolean }) {
+function ModernHeader({ favoritesActive = false }: { favoritesActive?: boolean }) {
   return (
     <header className="alt-catalog-header modern-header" data-figma-node="96:901">
       <div className="alt-menu-trigger">
@@ -227,18 +227,19 @@ function ModernHeader({ dark, onThemeToggle, favoritesActive = false }: { dark: 
       </a>
       <div className="alt-header-actions">
         <FavoritesLink active={favoritesActive} />
-        <button className={dark ? 'selected' : ''} type="button" onClick={onThemeToggle} aria-label="Переключить тёмную тему" aria-pressed={dark}>
-          <svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true"><path d="M26 19A11 11 0 0 1 13 6a11 11 0 1 0 13 13Z" fill="none" stroke="currentColor" strokeWidth="1.8" /></svg>
-        </button>
         <HeaderSearch />
       </div>
     </header>
   );
 }
 
+function Breadcrumbs({ current, dark, onThemeToggle, compact = false }: { current: string; dark: boolean; onThemeToggle: () => void; compact?: boolean }) {
+  return <nav className="alt-breadcrumbs" aria-label="Хлебные крошки"><a href="/catalog">Каталог</a><span>—</span><button type="button" onClick={onThemeToggle} aria-pressed={dark} aria-label="Переключить тёмную тему">Медицинская одежда</button>{!compact && <><span>—</span><a href="/catalog">Новые коллекции</a><span>—</span><a href="/catalog">Женская одежда</a></>}<span>—</span><strong>{current}</strong></nav>;
+}
+
 function ModernShell({ children, current, node }: { children: React.ReactNode; current: string; node: string }) {
   const { dark, toggleTheme } = useTheme();
-  return <main className={`alt-catalog-shell modern-shell ${dark ? 'dark' : ''}`} data-figma-node={node}><ModernHeader dark={dark} onThemeToggle={toggleTheme} /><nav className="alt-breadcrumbs" aria-label="Хлебные крошки"><a href="/catalog">Каталог</a><span>—</span><a href="/catalog">Медицинская одежда</a><span>—</span><a href="/catalog">Новые коллекции</a><span>—</span><a href="/catalog">Женская одежда</a><span>—</span><strong>{current}</strong></nav>{children}</main>;
+  return <main className={`alt-catalog-shell modern-shell ${dark ? 'dark' : ''}`} data-figma-node={node}><ModernHeader /><Breadcrumbs current={current} dark={dark} onThemeToggle={toggleTheme} />{children}</main>;
 }
 
 export function CompactCatalogScreen({ favoritesOnly = false }: { favoritesOnly?: boolean }) {
@@ -249,12 +250,8 @@ export function CompactCatalogScreen({ favoritesOnly = false }: { favoritesOnly?
 
   return (
     <main className={`alt-catalog-shell ${darkTheme ? 'dark' : ''}`} data-figma-node="96:1162">
-      <ModernHeader dark={darkTheme} onThemeToggle={toggleTheme} favoritesActive={favoritesOnly} />
-      <nav className="alt-breadcrumbs" aria-label="Хлебные крошки">
-        <a href="/catalog">Каталог</a><span>—</span>
-        {!favoritesOnly && <><a href="/catalog">Медицинская одежда</a><span>—</span><a href="/catalog">Новые коллекции</a><span>—</span></>}
-        <strong>{title}</strong>
-      </nav>
+      <ModernHeader favoritesActive={favoritesOnly} />
+      <Breadcrumbs current={title} dark={darkTheme} onThemeToggle={toggleTheme} compact />
       <section className="alt-catalog-panel">
         <h1>{title}</h1>
         <div className="alt-catalog-grid" data-figma-node="96:1165">
