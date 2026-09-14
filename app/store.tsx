@@ -27,7 +27,7 @@ export function HomeScreen() {
   return (
     <main className="home-screen" data-figma-node="129:4283">
       <section className="hero" data-figma-node="129:4285">
-        <img className="hero-image" src="/graphics/nimiti/home-alt/hero-overlay.png" alt="Медицинские специалисты в форме Minti" />
+        <img className="hero-image" src="/graphics/nimiti/home-alt/hero-overlay.webp" alt="Медицинские специалисты в форме Minti" />
         <div className="hero-shade" />
         <div className="home-header-shell">
         <header className="alt-catalog-header home-header" data-figma-node="129:4292">
@@ -77,7 +77,7 @@ const compactCatalogProducts = [
   name,
   price,
   colors: [0, 4, 10, 15].includes(index) ? colors : '',
-  image: `/graphics/nimiti/doctors-cool/photo-${String(index + 1).padStart(2, '0')}.png`,
+  image: `/graphics/nimiti/doctors-cool/photo-${String(index + 1).padStart(2, '0')}.webp`,
 }));
 
 const catalogMenuItems = [
