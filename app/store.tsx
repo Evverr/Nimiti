@@ -27,7 +27,7 @@ export function HomeScreen() {
   return (
     <main className="home-screen" data-figma-node="129:4283">
       <section className="hero" data-figma-node="129:4285">
-        <img className="hero-image" src="/graphics/nimiti/home-alt/hero-overlay.webp" alt="Медицинские специалисты в форме Minti" />
+        <img className="hero-image" src="/graphics/nimiti/home-alt/hero-doctors.png" alt="Медицинские специалисты в форме Minti" />
         <div className="hero-shade" />
         <div className="home-header-shell">
         <header className="alt-catalog-header home-header" data-figma-node="129:4292">
